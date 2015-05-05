@@ -1,19 +1,22 @@
 
 	import java.io.BufferedReader;
-	import java.io.IOException;
-	import java.io.InputStreamReader;
-	import java.io.OutputStreamWriter;
-	import java.io.PrintWriter;
-	import java.net.InetAddress;
-	import java.net.ServerSocket;
-	import java.net.Socket;
-	
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import Ventanas.*;
 
 	public class Servidor {
+		
+		static ventana_Principal mainFrame;
 
 		 static ServerSocket sk;
 		 static final int Puerto=9001;
-		
+	
 			
 		  static class HiloServidor implements Runnable {
 			    Socket client = null;
@@ -66,6 +69,8 @@
 		 
 		 public static void main(String args[]) {
 			
+			 mainFrame=new ventana_Principal();
+			 mainFrame.setVisible(true);
 			 
 			 boolean Serv=true;
 			   try {
