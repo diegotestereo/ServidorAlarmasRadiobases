@@ -1,11 +1,11 @@
 
 
 import Ventanas.*;
-
+import Clases.*;
 	public class Servidor {
 		
 		static ventana_Principal mainFrame;
-
+		static int Puerto;
 		
 		 
 		 
@@ -13,8 +13,21 @@ import Ventanas.*;
 			
 			 mainFrame=new ventana_Principal();
 			 mainFrame.setVisible(true);
-		
-			  }
+			 Puerto=Integer.parseInt(mainFrame.editPuerto.getText().toString());
+			
+		 
+		 
+		 }
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
 			
 	}
 	
