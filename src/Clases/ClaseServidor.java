@@ -9,10 +9,15 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ClaseServidor extends Thread {
-     ServerSocket sk = null;
-    Socket socketclient;
+import javax.swing.JTextArea;
 
+import Ventanas.ventana_Principal;
+
+public class ClaseServidor extends Thread {
+
+    ServerSocket sk = null;
+    Socket socketclient;
+    JTextArea jTextAreaVent;
 	String NombreCliente;
 	boolean BoolCliente=true;
 	int Puerto;
@@ -20,8 +25,9 @@ public class ClaseServidor extends Thread {
     boolean continuar = true;
    // hiloCliente hilclient;
     // constructor y parametro
-    public ClaseServidor(int Puerto) {
+    public ClaseServidor(int Puerto,JTextArea jTextAreaVent) {
         this.Puerto=Puerto;
+        this.jTextAreaVent=jTextAreaVent;
     }
     
     public void StopServer(){
@@ -42,10 +48,12 @@ public class ClaseServidor extends Thread {
 			        System.out.println("************    ServidorMulticliente      ***********");
 	                  System.out.println("************    IP: "+InetAddress.getLocalHost().getHostAddress()+":"+Puerto+"     **********");
 	                 System.out.println("*****************************************************");
-		                 
+	                 jTextAreaVent.setText("************    ServidorMulticliente      ***********\n");
+	                 jTextAreaVent.append("************    IP: "+InetAddress.getLocalHost().getHostAddress()+":"+Puerto+"     **********\n");
+	                 jTextAreaVent.append("*****************************************************\n");
 	                 System.out.println();
 		          while (continuar) { 
-		        	  System.out.println("Esperando cliente"+continuar);	              
+		        	  System.out.println("Esperando cliente: "+continuar);	              
 		              socketclient = sk.accept();// se queda a la espera de un cliente
 		              System.out.println("Ingreso Cliente");
 		              
@@ -53,6 +61,7 @@ public class ClaseServidor extends Thread {
 		              	
 		              	NombreCliente=socketclient.getInetAddress().getHostName();
 		                  System.out.println("Connected to client : "+NombreCliente);
+		                  jTextAreaVent.append("Connected to client : "+NombreCliente+"\n");
 		                  
 		                  do{
 		                  	//lee o que envia el cliente
@@ -63,11 +72,13 @@ public class ClaseServidor extends Thread {
 		                  	//formatea el dato de entrada o caste a aString
 		                  	
 		                  	 System.out.println(" String datos = entrada.readLine();");
-		                      String datos = entrada.readLine();// bloqueante
-		                    //  System.out.println("datos: "+datos);
-		      	         
+		                  	 jTextAreaVent.append("A la espera de datos del cliente: "+NombreCliente+"\n");
+				               
+		                  	   String datos = entrada.readLine();// bloqueante
+		                    
 		                      if (datos==null){
-		                      	// System.out.println("dato nulo");
+		                      	 System.out.println(NombreCliente+"Cerro la conexion");
+		                      	 jTextAreaVent.append(NombreCliente+"Cerro la conexion");
 		                      	 BoolCliente=false;
 		                           
 		                       }else{
@@ -75,11 +86,14 @@ public class ClaseServidor extends Thread {
 		                        System.out.println(datos);
 		                        
 		                        salida.println("Servidor -> "+NombreCliente+" : "+datos);
+		                        jTextAreaVent.append("Servidor->"+NombreCliente+" : "+datos+"\n");
+				                 
 		                       }
 		                       
 		                       }while(BoolCliente);//cuando el clientees
 		              } catch (Exception e) {
-		                  System.err.println(e.getMessage());
+		            	  jTextAreaVent.append("Servidor Cerrado\n");
+		                  System.err.println("mensajito : "+e.getMessage());
 		                  BoolCliente=false;
 		              }
 			        	
@@ -87,9 +101,8 @@ public class ClaseServidor extends Thread {
 		              
 		          }
 		   } catch (IOException e) {
-		          System.out.println(e);
-		          System.out.println("IOException"+continuar);
-		        
+		          System.out.println("mensajito: "+e);
+		         
 		   }
     	
     
