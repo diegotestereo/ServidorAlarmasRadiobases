@@ -14,10 +14,12 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Clases.ClaseServidor;
+import Clases.ClaseTimerReadBBDD;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+
 import javax.swing.border.BevelBorder;
 
 
@@ -34,12 +36,12 @@ public class ventana_Principal extends JFrame {
 	public JButton btn_InicioServer,btn_deteneServer;
 	static ClaseServidor ServerObj;
 	public JLabel lblRadiobase2;
-	public JLabel lblRadiobase1;
+	public static JLabel lblRadiobase1;
 	public JPanel panelRadiobase1;
 	public JPanel panelRadiobase2;
 	public JLabel lblRadiobase3;
 	public JPanel panelRadiobase3;
-	
+	ClaseTimerReadBBDD Timer;
 	
 	//Thread t ;
 
@@ -75,6 +77,9 @@ public class ventana_Principal extends JFrame {
 			  
 			startServidor();
 				
+			Timer=new ClaseTimerReadBBDD(4);
+			Timer.start();
+		 
 			}
 
 			
@@ -89,7 +94,8 @@ public class ventana_Principal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				textAreaConsola.setText("");
 				stopServidor();
-					
+				
+				Timer.detener();
 			}
 		});
 		
@@ -181,7 +187,7 @@ public class ventana_Principal extends JFrame {
 		  btn_deteneServer.setEnabled(true);
 		 editPuerto.setEnabled(false);
 		 int port=Integer.parseInt(editPuerto.getText().toString());
-		  ServerObj = new ClaseServidor(port,ventana_Principal.textAreaConsola);
+		  ServerObj = new ClaseServidor(port,ventana_Principal.textAreaConsola,ventana_Principal.lblRadiobase1);
 		  ServerObj.start();
 		 
 		  

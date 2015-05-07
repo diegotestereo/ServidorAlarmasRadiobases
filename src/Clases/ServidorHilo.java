@@ -13,16 +13,17 @@ public class ServidorHilo extends Thread {
     private Socket socketclient;
     private DataOutputStream dos;
     private DataInputStream dis;
-    JTextArea jTextAreaVent;
+    JTextArea TextAreaVent;
     String NombreCliente;
     BufferedReader entrada ;
     JLabel lbl;
     PrintWriter salida;
     ClaseBufferAlarma ThreadBufferAlarma;
+    ClaseWriteTablaBuffer ThreadBufferTablaBuffer;
    
-    public ServidorHilo(Socket socket,JTextArea jTextAreaVent, JLabel lbl) {
+    public ServidorHilo(Socket socket,JTextArea TextAreaVent, JLabel lbl) {
         this.socketclient = socket;
-        this.jTextAreaVent = jTextAreaVent;
+        this.TextAreaVent = TextAreaVent;
         this.lbl = lbl;
         
         try {
@@ -46,11 +47,13 @@ public class ServidorHilo extends Thread {
 		try {
 			datos = entrada.readLine();
 			salida.print("ok");
-			  String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
+			 String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
 		      
-			 jTextAreaVent.append(timeStamp+" "+datos+"\n");
-			 ThreadBufferAlarma=new ClaseBufferAlarma(datos,jTextAreaVent,lbl);
+			 TextAreaVent.append(timeStamp+" "+datos+"\n");
+			 ThreadBufferAlarma=new ClaseBufferAlarma(datos,TextAreaVent,lbl);
 			 ThreadBufferAlarma.start();
+			 ThreadBufferTablaBuffer=new ClaseWriteTablaBuffer(datos);
+			 ThreadBufferTablaBuffer.start();// escribe en la BBDD
 		     if (datos==null){
 		       	//socketclient.close();
 		               

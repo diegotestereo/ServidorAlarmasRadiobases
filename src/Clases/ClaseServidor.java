@@ -1,23 +1,20 @@
 package Clases;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTextArea;
-
-import Ventanas.ventana_Principal;
 
 public class ClaseServidor extends Thread {
 
     ServerSocket sk = null;
     
     JTextArea jTextAreaVent;
+    JLabel jLabel;
 	String NombreCliente;
 	boolean BoolCliente=true;
 	int Puerto;
@@ -25,9 +22,10 @@ public class ClaseServidor extends Thread {
     boolean continuar = true;
    // hiloCliente hilclient;
     // constructor y parametro
-    public ClaseServidor(int Puerto,JTextArea jTextAreaVent) {
+    public ClaseServidor(int Puerto,JTextArea jTextAreaVent,  JLabel jLabel) {
         this.Puerto=Puerto;
         this.jTextAreaVent=jTextAreaVent;
+        this.jLabel=jLabel;
     }
     
     public void StopServer(){
@@ -58,11 +56,15 @@ public class ClaseServidor extends Thread {
 		        	  Socket socketclient;
 		        	  socketclient = sk.accept();// se queda a la espera de un cliente
 		           //   System.out.println("Ingreso Cliente");
-		                ((ServidorHilo) new ServidorHilo(socketclient,jTextAreaVent)).start();
+		                ((ServidorHilo) new ServidorHilo(socketclient,jTextAreaVent,jLabel)).start();
 		          
 		         }
 		   } catch (IOException e) {
-		          System.out.println("mensajito: "+e);
+		          System.out.println("El Puerto se encuentra ocupado");
+		          
+		            
+		          
+		          
 		         
 		   }
     	

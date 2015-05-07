@@ -2,26 +2,30 @@ package Clases;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 public class ClaseBufferAlarma extends Thread{
 	
 	String buffer;
-	JPanel panel;
+	JTextArea TextArea;
 	 JLabel lbl;
 	
-	public  ClaseBufferAlarma(String buffer,JPanel panel, JLabel lbl){
-			
-		this.buffer=buffer;
-		this.panel=panel;
-		this.lbl=lbl;
+	
+	
+	
+	public ClaseBufferAlarma(String datos, JTextArea textAreaVent, JLabel lbl2) {
+		
+		this.buffer=datos;
+		this.TextArea=textAreaVent;
+		this.lbl=lbl2;
+		// TODO Auto-generated constructor stub
 	}
 
-	
-	
+
+
 	public void run(){
 		
-		System.out.println("algo llegoooooooo");
-		lbl.setText("ALARMA LA CONCHA DE TU MADRE !!!");
+		lbl.setText(buffer);
 		
 	}
 	
