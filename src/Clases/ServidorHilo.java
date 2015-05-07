@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.*;
 
+import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 public class ServidorHilo extends Thread {
@@ -15,11 +16,14 @@ public class ServidorHilo extends Thread {
     JTextArea jTextAreaVent;
     String NombreCliente;
     BufferedReader entrada ;
+    JLabel lbl;
     PrintWriter salida;
+    ClaseBufferAlarma ThreadBufferAlarma;
    
-    public ServidorHilo(Socket socket,JTextArea jTextAreaVent) {
+    public ServidorHilo(Socket socket,JTextArea jTextAreaVent, JLabel lbl) {
         this.socketclient = socket;
         this.jTextAreaVent = jTextAreaVent;
+        this.lbl = lbl;
         
         try {
              NombreCliente=socketclient.getInetAddress().getHostName();
@@ -45,6 +49,8 @@ public class ServidorHilo extends Thread {
 			  String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
 		      
 			 jTextAreaVent.append(timeStamp+" "+datos+"\n");
+			 ThreadBufferAlarma=new ClaseBufferAlarma(datos,jTextAreaVent,lbl);
+			 ThreadBufferAlarma.start();
 		     if (datos==null){
 		       	//socketclient.close();
 		               

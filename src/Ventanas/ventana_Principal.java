@@ -33,12 +33,12 @@ public class ventana_Principal extends JFrame {
 	public static JTextArea textAreaConsola;
 	public JButton btn_InicioServer,btn_deteneServer;
 	static ClaseServidor ServerObj;
-	private JLabel lblRadiobase2;
-	private JLabel lblRadiobase1;
-	private JPanel panelRadiobase1;
-	private JPanel panelRadiobase2;
-	private JLabel lblRadiobase3;
-	private JPanel panelRadiobase3;
+	public JLabel lblRadiobase2;
+	public JLabel lblRadiobase1;
+	public JPanel panelRadiobase1;
+	public JPanel panelRadiobase2;
+	public JLabel lblRadiobase3;
+	public JPanel panelRadiobase3;
 	
 	
 	//Thread t ;
