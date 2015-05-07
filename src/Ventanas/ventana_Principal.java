@@ -17,6 +17,8 @@ import Clases.ClaseServidor;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import javax.swing.border.BevelBorder;
 
 
 
@@ -31,6 +33,12 @@ public class ventana_Principal extends JFrame {
 	public static JTextArea textAreaConsola;
 	public JButton btn_InicioServer,btn_deteneServer;
 	static ClaseServidor ServerObj;
+	private JLabel lblRadiobase2;
+	private JLabel lblRadiobase1;
+	private JPanel panelRadiobase1;
+	private JPanel panelRadiobase2;
+	private JLabel lblRadiobase3;
+	private JPanel panelRadiobase3;
 	
 	
 	//Thread t ;
@@ -44,14 +52,14 @@ public class ventana_Principal extends JFrame {
 		
 		btn_InicioServer.setEnabled(true);
 		btn_deteneServer.setEnabled(false);
-		textAreaConsola.setText("ServerTCP");
+		textAreaConsola.setText("Presione el Boton Inicio");
 	
 	}
 
 	private void Inicializacion() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 643, 350);
+		setBounds(100, 100, 643, 540);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -79,42 +87,80 @@ public class ventana_Principal extends JFrame {
 		btn_deteneServer = new JButton("Server OFF");
 		btn_deteneServer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				textAreaConsola.setText("");
 				stopServidor();
 					
 			}
 		});
+		
+		panelRadiobase1 = new JPanel();
+		panelRadiobase1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panelRadiobase1.setForeground(Color.BLACK);
+		
+		panelRadiobase2 = new JPanel();
+		panelRadiobase2.setForeground(Color.BLACK);
+		panelRadiobase2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		
+		lblRadiobase2 = new JLabel("New label");
+		panelRadiobase2.add(lblRadiobase2);
+		
+		panelRadiobase3 = new JPanel();
+		panelRadiobase3.setForeground(Color.BLACK);
+		panelRadiobase3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		
+		lblRadiobase3 = new JLabel("New label");
+		panelRadiobase3.add(lblRadiobase3);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
+							.addGap(54)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(panelRadiobase1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+								.addComponent(panelRadiobase2, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+								.addComponent(panelRadiobase3, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
+							.addContainerGap(111, Short.MAX_VALUE))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addGap(55)
-							.addComponent(btn_InicioServer)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btn_deteneServer)
-							.addGap(111)
 							.addComponent(lblNewLabel)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(editPuerto, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
+							.addComponent(editPuerto, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(5, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btn_deteneServer, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+								.addComponent(btn_InicioServer))
+							.addGap(519))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btn_InicioServer)
-						.addComponent(btn_deteneServer)
-						.addComponent(editPuerto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
+					.addContainerGap(297, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(btn_InicioServer)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btn_deteneServer)
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNewLabel)
+								.addComponent(editPuerto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(panelRadiobase1, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(panelRadiobase2, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(panelRadiobase3, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+							.addGap(36))))
 		);
+		
+		lblRadiobase1 = new JLabel("New label");
+		panelRadiobase1.add(lblRadiobase1);
 		
 		textAreaConsola = new JTextArea();
 		scrollPane.setViewportView(textAreaConsola);
