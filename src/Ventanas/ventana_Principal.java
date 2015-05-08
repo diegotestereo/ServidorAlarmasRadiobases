@@ -13,6 +13,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import BBDD.Conexion;
 import Clases.ClaseServidor;
 import Clases.ClaseTimerReadBBDD;
 
@@ -21,6 +22,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 
 import javax.swing.border.BevelBorder;
+import javax.swing.JTable;
 
 
 
@@ -42,6 +44,7 @@ public class ventana_Principal extends JFrame {
 	public JLabel lblRadiobase3;
 	public JPanel panelRadiobase3;
 	ClaseTimerReadBBDD Timer;
+	private JTable table;
 	
 	//Thread t ;
 
@@ -61,7 +64,7 @@ public class ventana_Principal extends JFrame {
 	private void Inicializacion() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 643, 540);
+		setBounds(100, 100, 542, 540);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -76,9 +79,11 @@ public class ventana_Principal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			  
 			startServidor();
-				
+			 Conexion con=new Conexion();
+			 con.Conectar();	
+			
 			Timer=new ClaseTimerReadBBDD(4);
-			Timer.start();
+			//Timer.start();
 		 
 			}
 
@@ -116,46 +121,51 @@ public class ventana_Principal extends JFrame {
 		
 		lblRadiobase3 = new JLabel("New label");
 		panelRadiobase3.add(lblRadiobase3);
+		
+		table = new JTable();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
-							.addGap(54)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(panelRadiobase1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-								.addComponent(panelRadiobase2, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-								.addComponent(panelRadiobase3, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
-							.addContainerGap(111, Short.MAX_VALUE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblNewLabel)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(editPuerto, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(5, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btn_deteneServer, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-								.addComponent(btn_InicioServer))
-							.addGap(519))))
-		);
-		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(297, Short.MAX_VALUE)
+					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(btn_InicioServer)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btn_deteneServer)
-							.addGap(18)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel)
-								.addComponent(editPuerto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(18)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
+									.addGap(54)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+										.addComponent(panelRadiobase1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+										.addComponent(panelRadiobase2, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+										.addComponent(panelRadiobase3, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+									.addComponent(btn_InicioServer)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btn_deteneServer, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+									.addGap(18)
+									.addComponent(lblNewLabel)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(editPuerto, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+									.addGap(320)))
+							.addGap(0))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(table, GroupLayout.PREFERRED_SIZE, 485, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(111, Short.MAX_VALUE))))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(table, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btn_InicioServer)
+						.addComponent(btn_deteneServer)
+						.addComponent(lblNewLabel)
+						.addComponent(editPuerto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
 						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 							.addComponent(panelRadiobase1, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
@@ -189,8 +199,6 @@ public class ventana_Principal extends JFrame {
 		 int port=Integer.parseInt(editPuerto.getText().toString());
 		  ServerObj = new ClaseServidor(port,ventana_Principal.textAreaConsola,ventana_Principal.lblRadiobase1);
 		  ServerObj.start();
-		 
-		  
 		
 	}
 }

@@ -8,11 +8,14 @@ import java.util.logging.*;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
+import BBDD.Conexion;
+
 public class ServidorHilo extends Thread {
 	
     private Socket socketclient;
     private DataOutputStream dos;
     private DataInputStream dis;
+    Conexion Conectar;
     JTextArea TextAreaVent;
     String NombreCliente;
     BufferedReader entrada ;
@@ -30,6 +33,7 @@ public class ServidorHilo extends Thread {
              NombreCliente=socketclient.getInetAddress().getHostName();
         	 entrada = new BufferedReader(new InputStreamReader(socketclient.getInputStream()));
           	 salida= new PrintWriter(new OutputStreamWriter(socketclient.getOutputStream()),true);
+          	
         } catch (IOException ex) {
             
         }
@@ -46,14 +50,16 @@ public class ServidorHilo extends Thread {
     	  String datos;
 		try {
 			datos = entrada.readLine();
+			ThreadBufferTablaBuffer=new ClaseWriteTablaBuffer(datos);
+			ThreadBufferTablaBuffer.start();
+			
 			salida.print("ok");
 			 String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
 		      
 			 TextAreaVent.append(timeStamp+" "+datos+"\n");
 			 ThreadBufferAlarma=new ClaseBufferAlarma(datos,TextAreaVent,lbl);
 			 ThreadBufferAlarma.start();
-			 ThreadBufferTablaBuffer=new ClaseWriteTablaBuffer(datos);
-			 ThreadBufferTablaBuffer.start();// escribe en la BBDD
+			
 		     if (datos==null){
 		       	//socketclient.close();
 		               

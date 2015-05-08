@@ -40,18 +40,19 @@ public class ClaseServidor extends Thread {
     public void run() {
     	
 		   try {
-		          sk = new ServerSocket(Puerto);
+		         sk = new ServerSocket(Puerto);
 		         System.out.println();  
-	        	     System.out.println("*****************************************************");
-			        System.out.println("************    ServidorMulticliente      ***********");
-	                  System.out.println("************    IP: "+InetAddress.getLocalHost().getHostAddress()+":"+Puerto+"     **********");
-	                 System.out.println("*****************************************************");
+	        	 System.out.println("*****************************************************");
+			     System.out.println("************    ServidorMulticliente      ***********");
+	             System.out.println("************    IP: "+InetAddress.getLocalHost().getHostAddress()+":"+Puerto+"     **********");
+	             System.out.println("*****************************************************");
 	             
-	                 jTextAreaVent.setText("************    ServidorMulticliente      ***********\n");
-	                 jTextAreaVent.append("************    IP: "+InetAddress.getLocalHost().getHostAddress()+":"+Puerto+"     **********\n");
-	                 jTextAreaVent.append("*****************************************************\n");
-	                 System.out.println();
-		          while (continuar) { 
+	             jTextAreaVent.setText("************    ServidorMulticliente      ***********\n");
+	             jTextAreaVent.append("************    IP: "+InetAddress.getLocalHost().getHostAddress()+":"+Puerto+"     **********\n");
+	             jTextAreaVent.append("*****************************************************\n");
+	             System.out.println();
+		         
+	             while (continuar) { 
 		        	//  System.out.println("Esperando cliente: "+continuar);
 		        	  Socket socketclient;
 		        	  socketclient = sk.accept();// se queda a la espera de un cliente
