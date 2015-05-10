@@ -2,6 +2,8 @@ package Clases;
 
 import java.util.regex.Pattern;
 
+import KeepAlive.ClaseWriteTablaKeepAlive;
+
 public class ClaseReadBuffer extends Thread{
 	 private static final Pattern SPACE = Pattern.compile(" ");
 	 int Radiobase,Alarma;
@@ -30,20 +32,20 @@ public class ClaseReadBuffer extends Thread{
 		Alarma=Integer.parseInt(arr[2]);
 		// cuando la alarma es '1' es una keep alive.
 		// caso contrario es una alarma de algun tipo.
+
+		System.out.println("Alarma: "+Alarma);
 	if (Alarma==1){	
 		
 		System.out.println("KEEP ALIVE de RADIOBASE: " +Radiobase);
 		EscribirKA =new ClaseWriteTablaKeepAlive(Radiobase);
 		EscribirKA.start();
-		
 	
-		
 	}else{
+		
 		
 		System.out.println("Alarma de RADIOBASE: " +Radiobase);
 		EscribirEvento =new ClaseWriteTablaEventos(Radiobase,Alarma);
 		EscribirEvento.start();
-		
 		
 	}
 

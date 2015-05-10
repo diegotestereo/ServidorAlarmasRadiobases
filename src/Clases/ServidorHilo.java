@@ -30,9 +30,9 @@ public class ServidorHilo extends Thread {
         this.lbl = lbl;
         
         try {
-             NombreCliente=socketclient.getInetAddress().getHostName();
+           //  NombreCliente=socketclient.getInetAddress().getHostName();
         	 entrada = new BufferedReader(new InputStreamReader(socketclient.getInputStream()));
-          	 salida= new PrintWriter(new OutputStreamWriter(socketclient.getOutputStream()),true);
+       //   	 salida= new PrintWriter(new OutputStreamWriter(socketclient.getOutputStream()),true);
           	
         } catch (IOException ex) {
             
@@ -55,7 +55,7 @@ public class ServidorHilo extends Thread {
 			HiloLeerBuffer.start();
 			//ThreadBufferTablaBuffer.start();
 			
-			salida.print("ok");
+		//	salida.print("ok");
 			 String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
 		      
 			 TextAreaVent.append(timeStamp+" "+datos+"\n");
