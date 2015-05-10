@@ -21,8 +21,8 @@ public class ServidorHilo extends Thread {
     BufferedReader entrada ;
     JLabel lbl;
     PrintWriter salida;
-    ClaseBufferAlarma ThreadBufferAlarma;
-    ClaseWriteTablaBuffer ThreadBufferTablaBuffer;
+ 
+    ClaseReadBuffer HiloLeerBuffer;
    
     public ServidorHilo(Socket socket,JTextArea TextAreaVent, JLabel lbl) {
         this.socketclient = socket;
@@ -50,16 +50,16 @@ public class ServidorHilo extends Thread {
     	  String datos;
 		try {
 			datos = entrada.readLine();
-			ThreadBufferTablaBuffer=new ClaseWriteTablaBuffer(datos);
-			ThreadBufferTablaBuffer.start();
+		//	ThreadBufferTablaBuffer=new ClaseWriteTablaEventos(datos);
+			HiloLeerBuffer=new ClaseReadBuffer(datos);
+			HiloLeerBuffer.start();
+			//ThreadBufferTablaBuffer.start();
 			
 			salida.print("ok");
 			 String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
 		      
 			 TextAreaVent.append(timeStamp+" "+datos+"\n");
-			 ThreadBufferAlarma=new ClaseBufferAlarma(datos,TextAreaVent,lbl);
-			 ThreadBufferAlarma.start();
-			
+		
 		     if (datos==null){
 		       	//socketclient.close();
 		               

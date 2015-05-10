@@ -49,6 +49,27 @@ public void InsertarEventos(int IdRadio,int IdAlarma){
 
 }
 
+
+
+
+public void InsertarKeepAlive(int IdRadio){
+	
+	Connection con=Conectar();
+	
+		PreparedStatement pst;
+		try {
+			pst = con.prepareStatement("INSERT INTO keepalive (IdRadios) VALUES (?)");
+		
+			pst.setInt(1,IdRadio);
+			
+			pst.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+}
+
 public void InsertarRadiobases(String NomRadio,String TelRadio,String LatRadio,String LongRadio,
 		String LocRadio,String ProvRadio,String ContacRadio){
 	

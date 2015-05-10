@@ -27,6 +27,9 @@ public class ClaseBufferAlarma extends Thread{
 		
 		lbl.setText(buffer);
 		
+		
+		
+		
 	}
 	
 	
