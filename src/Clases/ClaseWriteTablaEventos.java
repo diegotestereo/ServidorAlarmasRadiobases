@@ -4,7 +4,7 @@ package Clases;
 
 import BBDD.Conexion;
 
-public class ClaseWriteTablaEventos extends Thread{
+public class ClaseWriteTablaEventos{
 
 	Conexion con;
 	int Radiobase,Alarma;

@@ -16,7 +16,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import BBDD.Conexion;
 import Clases.ClaseServidor;
 
-import KeepAlive.ClaseKeepAliveServer;
+import KeepAlive.ClaseServivorKA;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -38,10 +38,11 @@ public class ventana_Principal extends JFrame {
 	public static JTextArea textAreaConsola;
 	public JButton btn_InicioServer,btn_deteneServer;
 	static ClaseServidor ServerObj;
-	static ClaseKeepAliveServer ServerKeepAlive;
+	static ClaseServivorKA ServerKeepAliveObj;
 	public static JLabel lblRadiobase1;
 	public JPanel panelRadiobase1;
-	
+	public JButton btn_ServerKAOn;
+public 	JButton btn_ServerKAOff;
 	private JTable table;
 	private JTextField editPuertoKA;
 	
@@ -91,6 +92,7 @@ public class ventana_Principal extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		
 		btn_deteneServer = new JButton("Server OFF");
+
 		btn_deteneServer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				textAreaConsola.setText("");
@@ -113,16 +115,41 @@ public class ventana_Principal extends JFrame {
 		editPuertoKA.setColumns(10);
 		
 		textAreaConsola = new JTextArea();
+		
+		btn_ServerKAOn = new JButton("Server KA ON");
+		btn_ServerKAOn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				  int PortKA=Integer.parseInt(editPuertoKA.getText().toString());
+				  
+				  ServerKeepAliveObj=new ClaseServivorKA(PortKA);
+				  ServerKeepAliveObj.start();
+
+					Conexion con=new Conexion();
+					 con.Conectar();	
+					 btn_ServerKAOff.setEnabled(true);
+				  
+			}
+		});
+		
+		btn_ServerKAOff = new JButton("Server KA OFF");
+		btn_ServerKAOff.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				  editPuertoKA.setEnabled(true);
+				  ServerKeepAliveObj.StopServer();
+				  btn_ServerKAOn.setEnabled(true);
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(textAreaConsola, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(textAreaConsola, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 								.addComponent(btn_deteneServer, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
 								.addComponent(btn_InicioServer, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -136,11 +163,17 @@ public class ventana_Principal extends JFrame {
 									.addComponent(lblNewLabel)
 									.addGap(18)
 									.addComponent(editPuerto, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
-					.addGap(173)
-					.addComponent(panelRadiobase1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-					.addGap(0))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
+							.addGap(173)
+							.addComponent(panelRadiobase1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(61)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(btn_ServerKAOn, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btn_ServerKAOff, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(table, GroupLayout.PREFERRED_SIZE, 334, GroupLayout.PREFERRED_SIZE)
@@ -160,11 +193,13 @@ public class ventana_Principal extends JFrame {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblNewLabel)
-								.addComponent(editPuerto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(editPuerto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btn_ServerKAOn))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblNewLabel_1)
-								.addComponent(editPuertoKA, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+								.addComponent(editPuertoKA, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btn_ServerKAOff))))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -191,9 +226,9 @@ public class ventana_Principal extends JFrame {
 		  btn_deteneServer.setEnabled(false);
 		  btn_InicioServer.setEnabled(true);
 			 editPuerto.setEnabled(true);
-			 editPuertoKA.setEnabled(true);
+			
 		  ServerObj.StopServer();
-		  ServerKeepAlive.StopServer();
+		
 		 
 	}
 
@@ -203,12 +238,9 @@ public class ventana_Principal extends JFrame {
 		 editPuerto.setEnabled(false);
 		 editPuertoKA.setEnabled(false);
 		 int port=Integer.parseInt(editPuerto.getText().toString());
-		 int PortKA=Integer.parseInt(editPuertoKA.getText().toString());
 		  ServerObj = new ClaseServidor(port,ventana_Principal.textAreaConsola,ventana_Principal.lblRadiobase1);
 		  ServerObj.start();
-		  ServerKeepAlive=new ClaseKeepAliveServer();
-		  ServerKeepAlive.start();
-		  
+		
 		
 	}
 }

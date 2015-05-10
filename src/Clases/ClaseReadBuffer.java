@@ -4,7 +4,9 @@ import java.util.regex.Pattern;
 
 import KeepAlive.ClaseWriteTablaKeepAlive;
 
-public class ClaseReadBuffer extends Thread{
+public class ClaseReadBuffer {
+	
+	
 	 private static final Pattern SPACE = Pattern.compile(" ");
 	 int Radiobase,Alarma;
 	 String StringAlarma;
@@ -34,18 +36,20 @@ public class ClaseReadBuffer extends Thread{
 		// caso contrario es una alarma de algun tipo.
 
 		System.out.println("Alarma: "+Alarma);
+		
+		
 	if (Alarma==1){	
 		
 		System.out.println("KEEP ALIVE de RADIOBASE: " +Radiobase);
 		EscribirKA =new ClaseWriteTablaKeepAlive(Radiobase);
-		EscribirKA.start();
+		EscribirKA.run();
 	
 	}else{
 		
 		
 		System.out.println("Alarma de RADIOBASE: " +Radiobase);
 		EscribirEvento =new ClaseWriteTablaEventos(Radiobase,Alarma);
-		EscribirEvento.start();
+		EscribirEvento.run();
 		
 	}
 

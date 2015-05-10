@@ -2,7 +2,7 @@ package KeepAlive;
 
 import BBDD.Conexion;
 
-public class ClaseWriteTablaKeepAlive extends Thread{
+public class ClaseWriteTablaKeepAlive{
 	
 	int IdRadiobase;
 	Conexion con;

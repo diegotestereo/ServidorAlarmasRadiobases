@@ -38,6 +38,8 @@ public class ServidorHilo extends Thread {
             
         }
     }
+    
+    
     public void desconnectar() {
         try {
         	socketclient.close();
@@ -52,7 +54,7 @@ public class ServidorHilo extends Thread {
 			datos = entrada.readLine();
 		//	ThreadBufferTablaBuffer=new ClaseWriteTablaEventos(datos);
 			HiloLeerBuffer=new ClaseReadBuffer(datos);
-			HiloLeerBuffer.start();
+			HiloLeerBuffer.run();
 			//ThreadBufferTablaBuffer.start();
 			
 		//	salida.print("ok");

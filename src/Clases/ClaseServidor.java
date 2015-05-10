@@ -23,7 +23,8 @@ public class ClaseServidor extends Thread {
    // hiloCliente hilclient;
     // constructor y parametro
     public ClaseServidor(int Puerto,JTextArea jTextAreaVent,  JLabel jLabel) {
-        this.Puerto=Puerto;
+      
+    	this.Puerto=Puerto;
         this.jTextAreaVent=jTextAreaVent;
         this.jLabel=jLabel;
     }

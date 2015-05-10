@@ -5,15 +5,22 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ClaseKeepAliveServer extends Thread  {
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+
+public class ClaseServivorKA extends Thread  {
 	
 	   ServerSocket sk = null;
 	boolean continuar;
 	String NombreCliente;
 	boolean BoolCliente=true;
-	static final int Puerto=9002;
+	int Puerto;
    
 	
+	  public ClaseServivorKA(int Puerto) {
+	        this.Puerto=Puerto;
+	        System.out.println("Contructor con puerto : "+Puerto);  
+	    }
 	
 	   public void StopServer(){
 	    	  continuar = false;

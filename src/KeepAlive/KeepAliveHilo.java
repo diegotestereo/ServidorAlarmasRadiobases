@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class KeepAliveHilo extends Thread {
@@ -26,6 +28,8 @@ public class KeepAliveHilo extends Thread {
 	            
 	        }
 	    }
+	
+	
 	 public void desconnectar() {
 	        try {
 	        	socketclient.close();
@@ -43,11 +47,11 @@ public class KeepAliveHilo extends Thread {
 			datos = entrada.readLine();
 		//	ThreadBufferTablaBuffer=new ClaseWriteTablaEventos(datos);
 			HiloLeerBuffer=new ClaseReadBufferKeepAlive(datos);
-			HiloLeerBuffer.start();
+			HiloLeerBuffer.run();
 			//ThreadBufferTablaBuffer.start();
 			
 		//	salida.print("ok");
-	///		 String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
+			 String timeStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
 		      
 	//		 TextAreaVent.append(timeStamp+" "+datos+"\n");
 		
