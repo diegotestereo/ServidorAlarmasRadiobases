@@ -8,7 +8,7 @@ import java.net.Socket;
 
 import javax.swing.JTextArea;
 
-import Clases.ServidorHilo;
+
 
 public class ClaseServidorKA extends Thread{
 	
@@ -59,7 +59,7 @@ ServerSocket sk = null;
 		        	  Socket socketclient;
 		        	  socketclient = sk.accept();// se queda a la espera de un cliente
 		           //   System.out.println("Ingreso Cliente");
-		                ((ServidorHilo) new ServidorHilo(socketclient,jTextAreaVent)).start();
+		                ((ServidorHiloKA) new ServidorHiloKA(socketclient,jTextAreaVent)).start();
 		          
 		         }
 		   } catch (IOException e) {
