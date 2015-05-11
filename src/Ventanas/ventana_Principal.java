@@ -36,6 +36,7 @@ public class ventana_Principal extends JFrame {
 	public static JTextArea textAreaConsola,textAreaConsolaDeKeeps;
 	public JButton btn_InicioServer,btn_deteneServer;
 	static ClaseServidor ServerObj;
+	static ClaseServidorKA ServerObjKA;
 	public JButton btn_ServerKAOn;
 public 	JButton btn_ServerKAOff;
 	
@@ -51,7 +52,7 @@ public 	JButton btn_ServerKAOff;
 	
 		Inicializacion();
 		
-		btn_InicioServer.setEnabled(true);
+		btn_ServerKAOff.setEnabled(false);
 		btn_deteneServer.setEnabled(false);
 		textAreaConsola.setText("Consola de Eventos");
 	
@@ -121,27 +122,19 @@ public 	JButton btn_ServerKAOff;
 		textAreaConsolaDeKeeps.setText("Consola de Keeps Alives");
 		scrollPane_1.setViewportView(textAreaConsolaDeKeeps);
 		
-		JTextArea textArea = new JTextArea();
-		scrollPane_1.setViewportView(textArea);
-		
 		btn_ServerKAOff.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				  editPuertoKA.setEnabled(true);
-			 
-				  btn_ServerKAOn.setEnabled(true);
+				stoptServidorKA();
+				
 			}
 		});
 		btn_ServerKAOn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Conexion con=new Conexion();
+				 con.Conectar();	
+				  startServidorKA();
 				
-				
-				  int PortKA=Integer.parseInt(editPuertoKA.getText().toString());
-				 
-					//Conexion con=new Conexion();
-				//	 con.Conectar();	
-					 btn_ServerKAOff.setEnabled(true);
-				  
 			}
 		});
 		panel.setLayout(null);
@@ -182,10 +175,10 @@ public 	JButton btn_ServerKAOff;
 		
 		btn_InicioServer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			  
+				 Conexion con=new Conexion();
+				 con.Conectar();	
 			startServidor();
-			 Conexion con=new Conexion();
-			 con.Conectar();	
+			
 			
 			}
 
@@ -218,6 +211,31 @@ public 	JButton btn_ServerKAOff;
 		
 		
 	}
+	
+	
+	
+	protected void startServidorKA() {
+		btn_ServerKAOn.setEnabled(false);
+		  btn_ServerKAOff.setEnabled(true);
+		  editPuertoKA.setEnabled(false);
+		  int portKA=Integer.parseInt(editPuertoKA.getText().toString());
+			
+		  ServerObjKA=new ClaseServidorKA(portKA, ventana_Principal.textAreaConsolaDeKeeps);
+		  ServerObjKA.start();
+		 
+	}
+
+	protected void stoptServidorKA() {
+		  btn_ServerKAOn.setEnabled(true);
+		  btn_ServerKAOff.setEnabled(false);
+		  editPuertoKA.setEnabled(true);
+		 textAreaConsolaDeKeeps.setText("");
+		  ServerObjKA.StopServer();
+		
+		
+	}
+	
+	
 }
 
  

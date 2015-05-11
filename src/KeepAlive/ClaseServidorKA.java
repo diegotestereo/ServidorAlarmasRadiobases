@@ -1,20 +1,21 @@
-package Clases;
+package KeepAlive;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+
 import javax.swing.JTextArea;
 
-public class ClaseServidor extends Thread {
+import Clases.ServidorHilo;
 
-    ServerSocket sk = null;
+public class ClaseServidorKA extends Thread{
+	
+ServerSocket sk = null;
     
     JTextArea jTextAreaVent;
-    JLabel jLabel;
+   
 	String NombreCliente;
 	boolean BoolCliente=true;
 	int Puerto;
@@ -22,11 +23,11 @@ public class ClaseServidor extends Thread {
     boolean continuar = true;
    // hiloCliente hilclient;
     // constructor y parametro
-    public ClaseServidor(int Puerto,JTextArea jTextAreaVent) {
+    public ClaseServidorKA(int Puerto,JTextArea jTextAreaVent) {
       
     	this.Puerto=Puerto;
         this.jTextAreaVent=jTextAreaVent;
-        
+       
     }
     
     public void StopServer(){
@@ -44,15 +45,15 @@ public class ClaseServidor extends Thread {
 		         sk = new ServerSocket(Puerto);
 		         System.out.println();  
 	        	 System.out.println("*****************************************************");
-			     System.out.println("************    ServidorMulticliente      ***********");
+			     System.out.println("************    ServidorMulticliente Keeps Alive     ***********");
 	             System.out.println("************    IP: "+InetAddress.getLocalHost().getHostAddress()+":"+Puerto+"     **********");
 	             System.out.println("*****************************************************");
-	             
-	             jTextAreaVent.setText("************    ServidorMulticliente      ***********\n");
-	             jTextAreaVent.append("************    IP: "+InetAddress.getLocalHost().getHostAddress()+":"+Puerto+"     **********\n");
-	             jTextAreaVent.append("*****************************************************\n");
 	             System.out.println();
 		         
+	             jTextAreaVent.setText("************    ServidorMulticliente Keeps Alive      ***********\n");
+	             jTextAreaVent.append("************    IP: "+InetAddress.getLocalHost().getHostAddress()+":"+Puerto+"     **********\n");
+	             jTextAreaVent.append("*****************************************************\n");
+	           
 	             while (continuar) { 
 		        	//  System.out.println("Esperando cliente: "+continuar);
 		        	  Socket socketclient;
@@ -72,4 +73,5 @@ public class ClaseServidor extends Thread {
     	
     
     }
-    }
+
+}
