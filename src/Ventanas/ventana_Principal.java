@@ -16,7 +16,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import BBDD.Conexion;
 import Clases.ClaseServidor;
 
-import KeepAlive.ClaseServivorKA;
+import KeepAlive.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -38,7 +38,8 @@ public class ventana_Principal extends JFrame {
 	public static JTextArea textAreaConsola;
 	public JButton btn_InicioServer,btn_deteneServer;
 	static ClaseServidor ServerObj;
-	static ClaseServivorKA ServerKeepAliveObj;
+
+
 	public static JLabel lblRadiobase1;
 	public JPanel panelRadiobase1;
 	public JButton btn_ServerKAOn;
@@ -120,12 +121,9 @@ public 	JButton btn_ServerKAOff;
 				
 				
 				  int PortKA=Integer.parseInt(editPuertoKA.getText().toString());
-				  
-				  ServerKeepAliveObj=new ClaseServivorKA(PortKA);
-				  ServerKeepAliveObj.start();
-
-					Conexion con=new Conexion();
-					 con.Conectar();	
+				 
+					//Conexion con=new Conexion();
+				//	 con.Conectar();	
 					 btn_ServerKAOff.setEnabled(true);
 				  
 			}
@@ -136,7 +134,7 @@ public 	JButton btn_ServerKAOff;
 			public void actionPerformed(ActionEvent arg0) {
 				
 				  editPuertoKA.setEnabled(true);
-				  ServerKeepAliveObj.StopServer();
+				 
 				  btn_ServerKAOn.setEnabled(true);
 			}
 		});
@@ -232,7 +230,9 @@ public 	JButton btn_ServerKAOff;
 		  btn_deteneServer.setEnabled(true);
 		 editPuerto.setEnabled(false);
 		 editPuertoKA.setEnabled(false);
+		 
 		 int port=Integer.parseInt(editPuerto.getText().toString());
+		 
 		  ServerObj = new ClaseServidor(port,ventana_Principal.textAreaConsola,ventana_Principal.lblRadiobase1);
 		  ServerObj.start();
 		

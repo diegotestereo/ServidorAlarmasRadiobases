@@ -2,7 +2,7 @@ package Clases;
 
 import java.util.regex.Pattern;
 
-import KeepAlive.ClaseWriteTablaKeepAlive;
+import KeepAlive.*;
 
 public class ClaseReadBuffer {
 	
@@ -13,10 +13,7 @@ public class ClaseReadBuffer {
 
 	 String mensaje=null;
 	 ClaseWriteTablaEventos EscribirEvento;
-	 ClaseWriteTablaKeepAlive EscribirKA;
-	 
-		
-
+	
 	public ClaseReadBuffer(String mensaje){
 		
 		
@@ -41,9 +38,7 @@ public class ClaseReadBuffer {
 	if (Alarma==1){	
 		
 		System.out.println("KEEP ALIVE de RADIOBASE: " +Radiobase);
-		EscribirKA =new ClaseWriteTablaKeepAlive(Radiobase);
-		EscribirKA.run();
-	
+		
 	}else{
 		
 		
