@@ -24,6 +24,11 @@ import java.awt.Color;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.JTable;
+import javax.swing.border.CompoundBorder;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.SoftBevelBorder;
 
 
 
@@ -38,14 +43,12 @@ public class ventana_Principal extends JFrame {
 	public static JTextArea textAreaConsola;
 	public JButton btn_InicioServer,btn_deteneServer;
 	static ClaseServidor ServerObj;
-
-
-	public static JLabel lblRadiobase1;
-	public JPanel panelRadiobase1;
 	public JButton btn_ServerKAOn;
 public 	JButton btn_ServerKAOff;
-	private JTable table;
 	private JTextField editPuertoKA;
+	private JPanel panel_1;
+	private JScrollPane scrollPane_1;
+	private JTextArea txtrConsolaDeKeeps;
 	
 	//Thread t ;
 
@@ -58,64 +61,80 @@ public 	JButton btn_ServerKAOff;
 		
 		btn_InicioServer.setEnabled(true);
 		btn_deteneServer.setEnabled(false);
-		textAreaConsola.setText("Presione el Boton Inicio");
+		textAreaConsola.setText("Consola de Eventos");
 	
 	}
 
 	private void Inicializacion() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 542, 540);
+		setBounds(100, 100, 681, 469);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		editPuerto = new JTextField();
-		editPuerto.setText("9001");
-		editPuerto.setColumns(10);
+		JPanel panel = new JPanel();
+		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel.setBackground(new Color(204, 204, 102));
+		panel.setForeground(Color.BLACK);
 		
-		btn_InicioServer = new JButton("Server ON");
+		panel_1 = new JPanel();
+		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel_1.setBackground(new Color(255, 255, 102));
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
+					.addGap(56)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 290, GroupLayout.PREFERRED_SIZE)
+					.addGap(66))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addGap(21)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
+					.addGap(26))
+		);
+		panel_1.setLayout(null);
 		
-		btn_InicioServer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			  
-			startServidor();
-			 Conexion con=new Conexion();
-			 con.Conectar();	
-			
-			}
-
-			
-		});
+		btn_ServerKAOn = new JButton("Server KA ON");
+		btn_ServerKAOn.setBounds(28, 11, 103, 23);
+		panel_1.add(btn_ServerKAOn);
 		
-		JLabel lblNewLabel = new JLabel("Puerto Alarmas");
-		
-		JScrollPane scrollPane = new JScrollPane();
-		
-		btn_deteneServer = new JButton("Server OFF");
-
-		btn_deteneServer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				textAreaConsola.setText("");
-				stopServidor();
-				
-			
-			}
-		});
-		
-		panelRadiobase1 = new JPanel();
-		panelRadiobase1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panelRadiobase1.setForeground(Color.BLACK);
-		
-		table = new JTable();
-		
-		JLabel lblNewLabel_1 = new JLabel("Puerto Keep Alive");
+		btn_ServerKAOff = new JButton("Server KA OFF");
+		btn_ServerKAOff.setBounds(28, 45, 103, 23);
+		panel_1.add(btn_ServerKAOff);
 		
 		editPuertoKA = new JTextField();
+		editPuertoKA.setBounds(153, 46, 51, 20);
+		panel_1.add(editPuertoKA);
 		editPuertoKA.setText("9002");
 		editPuertoKA.setColumns(10);
 		
-		btn_ServerKAOn = new JButton("Server KA ON");
+		JLabel lblNewLabel_1 = new JLabel("Puerto Keep Alive");
+		lblNewLabel_1.setBounds(143, 15, 85, 14);
+		panel_1.add(lblNewLabel_1);
+		
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(28, 79, 238, 225);
+		panel_1.add(scrollPane_1);
+		
+		txtrConsolaDeKeeps = new JTextArea();
+		txtrConsolaDeKeeps.setText("Consola de Keeps Alives");
+		scrollPane_1.setViewportView(txtrConsolaDeKeeps);
+		btn_ServerKAOff.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				  editPuertoKA.setEnabled(true);
+				 
+				  btn_ServerKAOn.setEnabled(true);
+			}
+		});
 		btn_ServerKAOn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -128,89 +147,53 @@ public 	JButton btn_ServerKAOff;
 				  
 			}
 		});
+		panel.setLayout(null);
 		
-		btn_ServerKAOff = new JButton("Server KA OFF");
-		btn_ServerKAOff.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				  editPuertoKA.setEnabled(true);
-				 
-				  btn_ServerKAOn.setEnabled(true);
-			}
-		});
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(71)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(btn_deteneServer, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-								.addComponent(btn_InicioServer, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblNewLabel_1)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(editPuertoKA, 0, 0, Short.MAX_VALUE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblNewLabel)
-									.addGap(18)
-									.addComponent(editPuerto, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(48)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 296, GroupLayout.PREFERRED_SIZE)))
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(347)
-							.addComponent(panelRadiobase1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(61)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(btn_ServerKAOn, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btn_ServerKAOff, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 334, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(453, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(41, Short.MAX_VALUE)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btn_InicioServer)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btn_deteneServer))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel)
-								.addComponent(editPuerto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btn_ServerKAOn))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel_1)
-								.addComponent(editPuertoKA, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btn_ServerKAOff))))
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(198)
-							.addComponent(panelRadiobase1, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)))
-					.addGap(24))
-		);
+		btn_InicioServer = new JButton("Server ON");
+		btn_InicioServer.setBounds(20, 11, 83, 23);
+		panel.add(btn_InicioServer);
+		
+		btn_deteneServer = new JButton("Server OFF");
+		btn_deteneServer.setBounds(20, 45, 83, 23);
+		panel.add(btn_deteneServer);
+		
+		JLabel lblNewLabel = new JLabel("Puerto Alarmas");
+		lblNewLabel.setBounds(119, 14, 73, 14);
+		panel.add(lblNewLabel);
+		
+		editPuerto = new JTextField();
+		editPuerto.setBounds(129, 46, 40, 20);
+		panel.add(editPuerto);
+		editPuerto.setText("9001");
+		editPuerto.setColumns(10);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 79, 213, 225);
+		panel.add(scrollPane);
 		
 		textAreaConsola = new JTextArea();
 		scrollPane.setViewportView(textAreaConsola);
 		
-		lblRadiobase1 = new JLabel("New label");
-		panelRadiobase1.add(lblRadiobase1);
+				btn_deteneServer.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						textAreaConsola.setText("");
+						stopServidor();
+						
+					
+					}
+				});
+		
+		btn_InicioServer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			  
+			startServidor();
+			 Conexion con=new Conexion();
+			 con.Conectar();	
+			
+			}
+
+			
+		});
 		contentPane.setLayout(gl_contentPane);
 		
 	}
@@ -233,7 +216,7 @@ public 	JButton btn_ServerKAOff;
 		 
 		 int port=Integer.parseInt(editPuerto.getText().toString());
 		 
-		  ServerObj = new ClaseServidor(port,ventana_Principal.textAreaConsola,ventana_Principal.lblRadiobase1);
+		  ServerObj = new ClaseServidor(port,ventana_Principal.textAreaConsola);
 		  ServerObj.start();
 		
 		

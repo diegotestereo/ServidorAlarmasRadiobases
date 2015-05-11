@@ -19,15 +19,15 @@ public class ServidorHilo extends Thread {
     JTextArea TextAreaVent;
     String NombreCliente;
     BufferedReader entrada ;
-    JLabel lbl;
+  
     PrintWriter salida;
  
     ClaseReadBuffer HiloLeerBuffer;
    
-    public ServidorHilo(Socket socket,JTextArea TextAreaVent, JLabel lbl) {
+    public ServidorHilo(Socket socket,JTextArea TextAreaVent) {
         this.socketclient = socket;
         this.TextAreaVent = TextAreaVent;
-        this.lbl = lbl;
+       
         
         try {
            //  NombreCliente=socketclient.getInetAddress().getHostName();

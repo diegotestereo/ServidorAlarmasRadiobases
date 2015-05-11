@@ -22,7 +22,7 @@ public class ClaseServidor extends Thread {
     boolean continuar = true;
    // hiloCliente hilclient;
     // constructor y parametro
-    public ClaseServidor(int Puerto,JTextArea jTextAreaVent,  JLabel jLabel) {
+    public ClaseServidor(int Puerto,JTextArea jTextAreaVent) {
       
     	this.Puerto=Puerto;
         this.jTextAreaVent=jTextAreaVent;
@@ -58,7 +58,7 @@ public class ClaseServidor extends Thread {
 		        	  Socket socketclient;
 		        	  socketclient = sk.accept();// se queda a la espera de un cliente
 		           //   System.out.println("Ingreso Cliente");
-		                ((ServidorHilo) new ServidorHilo(socketclient,jTextAreaVent,jLabel)).start();
+		                ((ServidorHilo) new ServidorHilo(socketclient,jTextAreaVent)).start();
 		          
 		         }
 		   } catch (IOException e) {
