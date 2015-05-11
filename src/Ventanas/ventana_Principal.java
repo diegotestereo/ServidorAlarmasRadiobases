@@ -114,8 +114,6 @@ public 	JButton btn_ServerKAOff;
 		editPuertoKA.setText("9002");
 		editPuertoKA.setColumns(10);
 		
-		textAreaConsola = new JTextArea();
-		
 		btn_ServerKAOn = new JButton("Server KA ON");
 		btn_ServerKAOn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -146,10 +144,9 @@ public 	JButton btn_ServerKAOff;
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(textAreaConsola, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(71)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 								.addComponent(btn_deteneServer, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
 								.addComponent(btn_InicioServer, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -162,12 +159,13 @@ public 	JButton btn_ServerKAOff;
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lblNewLabel)
 									.addGap(18)
-									.addComponent(editPuerto, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))))
+									.addComponent(editPuerto, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(48)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 296, GroupLayout.PREFERRED_SIZE)))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
-							.addGap(173)
+							.addGap(347)
 							.addComponent(panelRadiobase1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(61)
@@ -200,21 +198,18 @@ public 	JButton btn_ServerKAOff;
 								.addComponent(lblNewLabel_1)
 								.addComponent(editPuertoKA, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btn_ServerKAOff))))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(76)
-									.addComponent(panelRadiobase1, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(18)
-									.addComponent(textAreaConsola, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)))
-							.addGap(24))
+							.addGap(198)
+							.addComponent(panelRadiobase1, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)))
+					.addGap(24))
 		);
+		
+		textAreaConsola = new JTextArea();
+		scrollPane.setViewportView(textAreaConsola);
 		
 		lblRadiobase1 = new JLabel("New label");
 		panelRadiobase1.add(lblRadiobase1);
