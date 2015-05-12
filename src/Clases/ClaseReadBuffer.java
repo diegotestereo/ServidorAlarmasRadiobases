@@ -13,7 +13,6 @@ public class ClaseReadBuffer {
 	 String StringAlarma;
 
 	 String mensaje=null;
-	 ClaseWriteTablaEventos EscribirEvento;
 	
 	public ClaseReadBuffer(String mensaje){
 		
@@ -33,16 +32,13 @@ public class ClaseReadBuffer {
 		// cuando la alarma es '1' es una keep alive.
 		// caso contrario es una alarma de algun tipo.
 
-		System.out.println("Alarma: "+Alarma);
+		System.out.println("mensajeevento: "+mensaje);
 		
 		
 	if (Alarma!=1){	
 		System.out.println("Alarma de RADIOBASE: " +Radiobase);
-		EscribirEvento =new ClaseWriteTablaEventos(Radiobase,Alarma);
+		 ClaseWriteTablaEventos EscribirEvento =new ClaseWriteTablaEventos(Radiobase,Alarma);
 		EscribirEvento.run();
-		
-	}else{
-		System.out.println("ALARMA erronea");
 		
 	}
 

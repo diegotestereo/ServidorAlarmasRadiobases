@@ -12,7 +12,6 @@ public class ClaseReadBufferKA {
 	 String StringAlarma;
 
 	 String mensaje=null;
-	 ClaseWriteTablaKA EscribirEvento;
 	
 	public ClaseReadBufferKA(String mensaje){
 		
@@ -31,23 +30,19 @@ public class ClaseReadBufferKA {
 		Alarma=Integer.parseInt(arr[2]);
 		// cuando la alarma es '1' es una keep alive.
 		// caso contrario es una alarma de algun tipo.
-
-		System.out.println("Alarma: "+Alarma);
+int Alarma2=1;
+		System.out.println("mensajes: "+mensaje);
 		
 		
-	if (Alarma==1){	
-		
-		System.out.println("KEEP ALIVE de RADIOBASE: " +Radiobase);
-		EscribirEvento=new ClaseWriteTablaKA(Radiobase);
-		EscribirEvento.escribir();
+	if (Alarma==Alarma2){	
 		
 		
-	}else{
-		System.out.println("KEEP ALIVE Erroneo");
-		EscribirEvento=new ClaseWriteTablaKA(Radiobase);
-		EscribirEvento.escribir();
+		 ClaseWriteTablaKA EscribirEventoKA=new ClaseWriteTablaKA(Radiobase);
+		EscribirEventoKA.escribir();
+		System.out.println("Keep Alive escrito");
+			
 		
-		
+	}else{System.out.println("Keep Alive NO escrito");
 	}
 }
 

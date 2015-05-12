@@ -28,7 +28,7 @@ public class ServidorHiloKA extends Thread{
   
     PrintWriter salida;
  
-    ClaseReadBuffer HiloLeerBuffer;
+    ClaseReadBufferKA HiloLeerBuffer;
    
     public ServidorHiloKA(Socket socket,JTextArea TextAreaVent) {
         this.socketclient = socket;
@@ -59,7 +59,7 @@ public class ServidorHiloKA extends Thread{
 		try {
 			datos = entrada.readLine();
 		//	ThreadBufferTablaBuffer=new ClaseWriteTablaEventos(datos);
-			HiloLeerBuffer=new ClaseReadBuffer(datos);
+			HiloLeerBuffer=new ClaseReadBufferKA(datos);
 			HiloLeerBuffer.run();
 			//ThreadBufferTablaBuffer.start();
 			
