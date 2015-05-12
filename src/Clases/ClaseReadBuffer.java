@@ -2,6 +2,7 @@ package Clases;
 
 import java.util.regex.Pattern;
 
+import BBDD.ClaseWriteTablaEventos;
 import KeepAlive.*;
 
 public class ClaseReadBuffer {
@@ -35,16 +36,13 @@ public class ClaseReadBuffer {
 		System.out.println("Alarma: "+Alarma);
 		
 		
-	if (Alarma==1){	
-		
-		System.out.println("KEEP ALIVE de RADIOBASE: " +Radiobase);
-		
-	}else{
-		
-		
+	if (Alarma!=1){	
 		System.out.println("Alarma de RADIOBASE: " +Radiobase);
 		EscribirEvento =new ClaseWriteTablaEventos(Radiobase,Alarma);
 		EscribirEvento.run();
+		
+	}else{
+		System.out.println("ALARMA erronea");
 		
 	}
 

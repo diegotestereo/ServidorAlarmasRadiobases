@@ -2,7 +2,8 @@ package KeepAlive;
 
 import java.util.regex.Pattern;
 
-import Clases.ClaseWriteTablaEventos;
+import BBDD.ClaseWriteTablaEventos;
+import BBDD.ClaseWriteTablaKA;
 
 public class ClaseReadBufferKA {
 	
@@ -11,7 +12,7 @@ public class ClaseReadBufferKA {
 	 String StringAlarma;
 
 	 String mensaje=null;
-	 ClaseWriteTablaEventos EscribirEvento;
+	 ClaseWriteTablaKA EscribirEvento;
 	
 	public ClaseReadBufferKA(String mensaje){
 		
@@ -37,16 +38,17 @@ public class ClaseReadBufferKA {
 	if (Alarma==1){	
 		
 		System.out.println("KEEP ALIVE de RADIOBASE: " +Radiobase);
+		EscribirEvento=new ClaseWriteTablaKA(Radiobase);
+		EscribirEvento.escribir();
+		
 		
 	}else{
+		System.out.println("KEEP ALIVE Erroneo");
+		EscribirEvento=new ClaseWriteTablaKA(Radiobase);
+		EscribirEvento.escribir();
 		
-		
-		System.out.println("Alarma de RADIOBASE: " +Radiobase);
-		EscribirEvento =new ClaseWriteTablaEventos(Radiobase,Alarma);
-		EscribirEvento.run();
 		
 	}
-
 }
 
 }

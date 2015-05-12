@@ -1,8 +1,7 @@
-package Clases;
+package BBDD;
 
 
 
-import BBDD.Conexion;
 
 public class ClaseWriteTablaEventos{
 

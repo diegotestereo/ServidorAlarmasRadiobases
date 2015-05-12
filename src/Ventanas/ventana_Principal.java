@@ -131,8 +131,7 @@ public 	JButton btn_ServerKAOff;
 		});
 		btn_ServerKAOn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Conexion con=new Conexion();
-				 con.Conectar();	
+				
 				  startServidorKA();
 				
 			}
@@ -175,8 +174,7 @@ public 	JButton btn_ServerKAOff;
 		
 		btn_InicioServer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				 Conexion con=new Conexion();
-				 con.Conectar();	
+				
 			startServidor();
 			
 			
